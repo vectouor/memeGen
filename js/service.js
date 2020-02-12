@@ -4,7 +4,7 @@
 var gNumberOfLines = 0;
 var gCanvas;
 var gCtx;
-var gLineX = 500 / 2 - 150;
+var gLineX = 500 / 2 - 200;
 var gLineY = 500 / 2 - 150;
 var gKeywords = { 'happy': 12, 'funny puk': 1 }
 var gMeme = {

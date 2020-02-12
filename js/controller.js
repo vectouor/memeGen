@@ -17,11 +17,13 @@ function renderGallery() {
 function onAddLine() {
     var strHTML =
         `<div class="controls control-box-${++lineIdx}">
-    <input class="input-text" type="text">
-    <button onclick="onAddText(event)">add text</button>
-    <button onclick="onAddLine()">add line</button>
-    <button onclick="returnToGallery()">go back</button>
-    <button onclick="onRemoveLine()">X</button>
+        <input class="input-text" type="text" onkeyup="onMemeChange()">
+        <button class="control-btn" onclick=" onMoveLineUp()">↑</button>
+        <button class="control-btn" onclick="onMoveLineDown()">↓</button>
+        <button class="control-btn" onclick=" onMoveLineDown() ">⇅</button>
+        <button class="control-btn" onclick=" onAddLine()">+</button>
+        <button class="control-btn" onclick="returnToGallery()">back</button>
+        <button class="control-btn" onclick="onRemoveLine()">X</button>
     </div>`;
     var elOperators = document.querySelector('.control-boxes-section');
     elOperators.innerHTML += strHTML;
@@ -87,6 +89,50 @@ function onMemeChange() {
     clearCanvas();
     drawText(gLineX, gLineY);
 }
+
+
+// e.preventDefault();
+
+//  var text = $('.input-text').val(),
+//  fontSize = parseInt($('#font-size').val()),
+//  width = parseInt($('#width').val()),
+//  lines = [],
+//  line = '',
+//  lineTest = '',
+//  words = text.split(' '),
+//  currentY = 0;
+
+// gCtx.font = fontSize + 'px Impact';
+
+// for (var i = 0, len = words.length; i < len; i++) {
+//  lineTest = line + words[i] + ' ';
+
+//  // Check total width of line or last word
+//  if (gCtx.measureText(lineTest).width > width) {
+//      // Calculate the new height
+//      currentY = lines.length * fontSize + fontSize;
+
+//      // Record and reset the current line
+//      lines.push({ text: line, height: currentY });
+//      line = words[i] + ' ';
+//  } else {
+//      line = lineTest;
+//  }
+// }
+
+// // Catch last line in-case something is left over
+// if (line.length > 0) {
+//  currentY = lines.length * fontSize + fontSize;
+//  lines.push({ text: line.trim(), height: currentY });
+// }
+
+// // Visually output text
+// gCtx.clearRect(0, 0, 500, 500);
+// for (var i = 0, len = lines.length; i < len; i++) {
+//  gCtx.fillText(lines[i].text, 0, lines[i].height);
+// }
+
+
 
 // function saveAndRestore() {
 //     gCtx.strokeStyle = 'red'

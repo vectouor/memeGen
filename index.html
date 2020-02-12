@@ -23,13 +23,13 @@
         </div>
     </nav>
 
-    <main class="gallery-container items-center" hidden>
+    <main class="gallery-container items-center">
         <section class="gallery grid"></section>
     </main>
 
     <div class="editor-container">
 
-        <section class="editor grid">
+        <section class="editor grid" hidden>
             <section class="canvas-section">
                 <canvas id="my-canvas" width="500" height="500" style="border:1px solid"></canvas>
             </section>
@@ -40,7 +40,6 @@
                     <button class="control-btn" onclick=" onMoveLineUp()">↑</button>
                     <button class="control-btn" onclick="onMoveLineDown()">↓</button>
                     <button class="control-btn" onclick=" onMoveLineDown() ">⇅</button>
-                    <!-- <button class="control-btn" onclick="onAddText(this)">add text</button> -->
                     <button class="control-btn" onclick=" onAddLine()">+</button>
                     <button class="control-btn" onclick="returnToGallery()">back</button>
                 </div>

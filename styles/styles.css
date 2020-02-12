@@ -103,11 +103,18 @@ li:hover {
 }
 
 .control-btn {
-    width: 30px;
+    width: 95px;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-bottom: 10px;
+    text-overflow: ellipsis;
+    font-size: 1.2rem;
 }
 
-*/ .input-text {
-    width: 480px;
+.input-text {
+    margin-bottom: 10px;
+    width: 490px;
+    height: 28px;
     /* height: 3rem; */
 }
 
