@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Meme-Gen</title>
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+
+<body onload="init()">
+
+    <nav class="navbar">
+        <div class="nav-container container flex space-between items-center">
+            <div class="logo">MemeGen</div>
+            <ul class="flex">
+                <li><a href="">Gallery</a></li>
+                <li><a href="">Memes</a></li>
+                <li><a href="">About</a></li>
+            </ul>
+            <!-- <button class="side-menu-btn" onclick="toggleMenu()">☰</button> -->
+        </div>
+    </nav>
+
+    <main class="gallery-container items-center" hidden>
+        <section class="gallery grid"></section>
+    </main>
+
+    <div class="editor-container">
+
+        <section class="editor grid">
+            <section class="canvas-section">
+                <canvas id="my-canvas" width="500" height="500" style="border:1px solid"></canvas>
+            </section>
+
+            <section class="control-boxes-section grid">
+                <div class="controls control-box-1">
+                    <input class="input-text" type="text" onkeyup="onMemeChange()">
+                    <button class="control-btn" onclick=" onMoveLineUp()">↑</button>
+                    <button class="control-btn" onclick="onMoveLineDown()">↓</button>
+                    <button class="control-btn" onclick=" onMoveLineDown() ">⇅</button>
+                    <!-- <button class="control-btn" onclick="onAddText(this)">add text</button> -->
+                    <button class="control-btn" onclick=" onAddLine()">+</button>
+                    <button class="control-btn" onclick="returnToGallery()">back</button>
+                </div>
+            </section>
+        </section>
+    </div>
+    </section>
+
+    <script src="lib/jquery.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/controller.js"></script>
+    <script src="js/service.js"></script>
+</body>
+
+</html>

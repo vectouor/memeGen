@@ -1,0 +1,151 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(221, 206, 206);
+}
+
+.logo {
+    font-size: 1.5rem;
+    margin-left: 10px;
+}
+
+
+/*=====================================================================*/
+
+
+/*navbar*/
+
+.navbar {
+    width: 100%;
+    background-color: #000000;
+    color: #fff;
+}
+
+.nav-container {
+    height: 80px;
+}
+
+.nav-container ul {
+    height: 100%;
+    padding-left: 0;
+}
+
+.nav-container li {
+    list-style-type: none;
+    width: 8.125rem;
+    height: 100%;
+}
+
+.nav-container a {
+    text-decoration: none;
+    display: block;
+    text-align: center;
+    border-right: #000000 solid 1px;
+    color: #fff;
+    line-height: 80px;
+}
+
+.nav-container>:nth-child(2) {
+    border-left: #1e1e1e solid 1px;
+}
+
+.nav-container a:hover,
+li:hover {
+    color: #c93a3a;
+}
+
+
+/*=====================================================================*/
+
+.my-canvas {
+    padding: 5px;
+}
+
+.gallery {
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    grid-gap: 10px;
+}
+
+.gallery-container,
+.canvas-section,
+.item {
+    margin: auto;
+}
+
+
+/*=====================================================================*/
+
+.editor {
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 10px;
+    margin: auto;
+}
+
+.editor-container {
+    margin-top: 10px;
+}
+
+
+/* .editor-container {} */
+
+.control-boxes-section {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.controls {
+    /* grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr; */
+    padding: 5px;
+}
+
+.control-btn {
+    width: 30px;
+}
+
+*/ .input-text {
+    width: 480px;
+    /* height: 3rem; */
+}
+
+
+/* .canvas-section {
+
+} */
+
+
+/*=====================================================================*/
+
+
+/* helpers */
+
+.grid {
+    display: grid;
+}
+
+.flex {
+    display: flex;
+}
+
+.column {
+    flex-direction: column;
+}
+
+.space-between {
+    justify-content: space-between;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.flex-start {
+    align-items: flex-start;
+}
