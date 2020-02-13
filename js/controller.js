@@ -25,6 +25,17 @@ function returnToGallery() {
     // }
 }
 /*========================================================================================*/
+//hide gallery, show editor with selected picture.
+function selectImage(el) {
+    gCurrImg = el;
+    $('.gallery').hide();
+    $('.editor').show();
+    $('.editor-container').show();
+    gCtx.drawImage(gCurrImg, 0, 0, 500, 500);
+    render()
+}
+
+/*========================================================================================*/
 function drawText(x, y) {
     gCtx.lineWidth = '1';
     gCtx.strokeStyle = gMeme.lines[gMeme.selectedLineIdx].strokeColor;
@@ -35,39 +46,24 @@ function drawText(x, y) {
     gCtx.strokeText(gMeme.lines[gMeme.selectedLineIdx].txt, x, y);
 }
 
-/*========================================================================================*/
-//hide gallery, show editor with selected picture.
-function selectImage(el) {
-    gCurrImg = el;
-    $('.gallery').hide();
-    $('.editor').show();
-    $('.editor-container').show();
-    gCtx.drawImage(gCurrImg, 0, 0, 500, 500);
-}
+
 /*===============================================================================*/
-function onMoveLine(change) {
-    if (gLineY < (gMeme.lines[gMeme.selectedLineIdx].size + 10)) {
-        gLines += 20;
-        clearCanvas();
-        render();
-        return;
-    }
-    gLineY += change;
-    clearCanvas();
+function onMoveLine(inc) {
+    gLineY += inc;
     render();
 }
+
 /*===============================================================================*/
 function render() {
-    drawText(gLineX, gLineY);
+    gCtx.restore();
     gCtx.drawImage(gCurrImg, 0, 0, 500, 500);
     drawText(gLineX, gLineY);
+    gCtx.save();
 }
 /*===============================================================================*/
 function onTextSizeChange(sizeInc) {
 
-    console.log(gCtx.measureText($('.input-text').val()).width);
     let textSize = getTextSize();
-    console.log(textSize)
 
     if (gCtx.measureText($('.input-text').val()).width > 480) {
         console.log(sizeInc)
@@ -87,27 +83,35 @@ function clearCanvas() {
 }
 /*===============================================================================*/
 function onMemeTextChange() {
-    console.log(gLineX, gLineY)
+    let lineIdx = getSelectedMemeLine();
     if (gCtx.measureText($('.input-text').val()).width > 450) {
-
         return;
     }
-    setMemeText($('.input-text').val());
+    setMemeText($('.input-text').val(), lineIdx);
     clearCanvas();
     render();
 }
 /*===============================================================================*/
-function canvasClicked(ev) {
+// function canvasClicked(ev) {
+function onSelectLine(ev) {
 
     let idx = getSelectedMemeLine();
-    console.log(idx)
-    console.log(ev.offsetX, ev.offsetY)
-        // if (ev.offsetY < gMeme.lines[idx].lineY) {
-        //     console.log('line1')
-        // }
-        // if (ev.offsetY < 480 && ev.offsetY >= gMeme.lines[idx].lineY) {
-        //     console.log('line2')
-        // }
+    let lineSize = getMemeLineSize(idx);
+
+    if (ev.offsetY <= gLineY && ev.offsetY >= gLineY - lineSize) {
+
+        setSelectedMemeLine(0);
+        gLineY = gMeme.lines[0].lineY;
+        console.log('line1')
+        render();
+    }
+
+    if (ev.offsetY <= (gCanvas.height - 10) && ev.offsetY >= gMeme.lines[1].lineY - gMeme.lines[1].size) {
+        setSelectedMemeLine(1);
+        gLineY = gMeme.lines[1].lineY;
+        console.log('line2')
+        render();
+    }
 }
 /*===============================================================================*/
 function onChangeStrokeColor(el) {
@@ -119,6 +123,36 @@ function onChangeFillColor(el) {
     setFillColor(el.value);
     render();
 }
+/*========================================================================================*/
+// function onMoveLine(inc) {
+
+//     let lineIdx = getSelectedMemeLine();
+
+//     if (gLineY < (gMeme.lines[lineIdx].lineY)) {
+//         gLineY -= 20;
+//         clearCanvas();
+//         render();
+//         return;
+//     }
+
+//     gLineY += inc;
+//     clearCanvas();
+//     render();
+// }
+/*========================================================================================*/
+// function saveAndRestoreExample() {
+//     gCtx.strokeStyle = 'red'
+//     gCtx.fillStyle = 'white'
+//     drawText('befor save', 100, 60)
+//     gCtx.save()
+//     // drawText('after save', 100, 160)
+//     gCtx.strokeStyle = 'black'
+//     gCtx.fillStyle = 'red'
+//     drawText('after save and change', 20, 260)
+//     gCtx.restore()
+//     drawText('after restore', 100, 360)
+// }
+
 /*========================================================================================*/
 // function onAddText(el) {
 //     console.log($('.input-text').val());

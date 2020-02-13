@@ -1,14 +1,13 @@
 'use strict'
 
-var gCurrSelectedLine = 0;
-var gMaxLineWidth = 480;
+// var gMaxLineWidth = 480;
 var gCanvas;
 var gCtx;
 var gCurrImg;
 var gLineX;
 var gLineY;
-var gLines = [];
-var gLines = _createLines();
+// var gLines = [];
+// var gLines = _createLines();
 var gKeywords = { 'happy': 12, 'funny puk': 1 }
 
 var gMeme = {
@@ -20,8 +19,8 @@ var gMeme = {
             align: 'center',
             fillColor: 'white',
             stokeColor: 'black',
-            lineX: gLines[0].lineX,
-            lineY: gLines[0].lineY,
+            lineX: 250,
+            lineY: 70,
         },
         {
             txt: 'memeGen line 2',
@@ -29,12 +28,18 @@ var gMeme = {
             align: 'center',
             fillColor: 'green',
             stokeColor: 'black',
-            lineX: gLines[1].gLineX,
-            lineY: gLines[1].gLineY,
+            lineX: 250,
+            lineY: 480,
         }
-    ]
+    ],
 };
-
+// var lines = [{
+//     lineX: 250,
+//     lineY: 70,
+// }, {
+//     lineX: 250,
+//     lineY: 490,
+// }]
 var gImgs = [
     { id: 1, url: 'meme-imgs/1.jpg', keywords: ['toy story'] },
     { id: 2, url: 'meme-imgs/2.jpg', keywords: ['dogs'] },
@@ -56,26 +61,26 @@ var gImgs = [
     { id: 18, url: 'meme-imgs/18.jpg', keywords: ['tired'] },
 ];
 
-function _createLine(lineCoords) {
-    return {
-        lineX: lineCoords.lineX,
-        lineY: lineCoords.lineY
-    }
-}
+// function _createLine(lineCoords) {
+//     return {
+//         lineX: lineCoords.lineX,
+//         lineY: lineCoords.lineY
+//     }
+// }
 
-function _createLines() {
-    // var lines = loadFromStorage(KEY);
-    // if (lines) return lines;
+// function _createLines() {
+//     // var lines = loadFromStorage(KEY);
+//     // if (lines) return lines;
 
-    var lines = [{
-        lineX: 250,
-        lineY: 60,
-    }, {
-        lineX: 250,
-        lineY: 480,
-    }].map(_createLine);
-    return lines;
-}
+//     var lines = [{
+//         lineX: 250,
+//         lineY: 70,
+//     }, {
+//         lineX: 250,
+//         lineY: 490,
+//     }].map(_createLine);
+//     return lines;
+// }
 
 /*========================================================================================*/
 /* getters & setters */
@@ -83,7 +88,7 @@ function getImages() { return gImgs; }
 
 function getMeme() { return gMeme; }
 
-function getMemeLineSize() { return gMeme.line[gMeme.selectedLineIdx].size }
+function getMemeLineSize(lineIdx = 0) { return gMeme.lines[lineIdx].size }
 
 function getSelectedMemeLine() { return gMeme.selectedLineIdx; }
 
@@ -115,8 +120,8 @@ function getLineX() { return gLineX; }
 
 // function addLine(){}
 
-function getLines() {
-    return gLines;
-}
+// function getLines() {
+//     return gLines;
+// }
 
 /*========================================================================================*/
