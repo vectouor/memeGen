@@ -18,7 +18,7 @@ html {
     font-size: 2.5rem;
     margin-left: 15px;
     font-weight: 600;
-    color: rgb(0, 0, 0);
+    color: #fff;
 }
 
 .header {
@@ -46,7 +46,6 @@ html {
     width: 100%;
     background-color: #BA9380;
     color: #fff;
-    border: 1px solid #000;
 }
 
 .nav-container {
@@ -98,7 +97,8 @@ li:hover {
 .gallery {
     grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
     grid-gap: 5px;
-    margin: 5px 5px 5px;
+    /* margin: 5px 5px 5px; */
+    margin-top: 10px;
     text-align: center;
     background-color: rgb(218, 192, 149);
 }
@@ -107,7 +107,8 @@ li:hover {
     /* text-align: center; */
     /* width: 300px; */
     max-height: 400px;
-    margin: auto;
+    margin: 10px auto;
+    grid-template-rows: auto;
     /* margin: 5px 10px; */
 }
 
@@ -121,11 +122,13 @@ li:hover {
 /*=====================================================================*/
 
 .editor {
-    grid-template-columns: 1fr 1fr;
     grid-gap: 10px;
     margin: auto;
     background-color: #0E95A1;
     padding: 10px;
+    grid-template-rows: auto;
+    align-items: center;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
 }
 
 .editor-container {
@@ -136,6 +139,7 @@ li:hover {
 /* .editor-container {} */
 
 .control-boxes-section {
+    grid-template-rows: auto;
     margin-right: auto;
     margin-left: auto;
     background-color: #A2D3C2;
@@ -263,8 +267,8 @@ li:hover {
         display: block;
         color: #fff;
         height: 80px;
-        border: #292929 solid 1px;
         background-color: #BA9380;
+        border: #BA9380;
         font-size: 1.6rem;
     }
     .nav-container>ul {
