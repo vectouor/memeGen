@@ -22,36 +22,62 @@
             <!-- <button class="side-menu-btn" onclick="toggleMenu()">☰</button> -->
         </div>
     </nav>
+    <!-- <header class="header">
+        <input type="text" placeholder="search">
+        <p>links</p>
+    </header> -->
 
+    <!-- <main class="gallery-container items-center" hidden> -->
     <main class="gallery-container items-center">
-        <section class="gallery grid"></section>
+        <!-- <section class="gallery grid"></section> -->
+        <section class="gallery"></section>
     </main>
 
-    <div class="editor-container">
+    <div class="editor-container" hidden>
+        <!-- <div class="editor-container"> -->
 
         <section class="editor grid" hidden>
+            <!-- <section class="editor grid"> -->
             <section class="canvas-section">
-                <canvas id="my-canvas" width="500" height="500" style="border:1px solid"></canvas>
+                <canvas id="my-canvas" width="500" height="500" style="border:1px solid" onclick="canvasClicked(event)"></canvas>
             </section>
 
             <section class="control-boxes-section grid">
                 <div class="controls control-box-1">
+                    <!-- <h1>first.line</h1> -->
+                    <input class="input-text" type="text" onkeyup="onMemeTextChange()">
+                    <button class="control-btn" onclick=" onMoveLine(-10)">↑</button>
+                    <button class="control-btn" onclick="onMoveLine(10)">↓</button>
+                    <button class="control-btn" onclick=" onMoveLineDown()">⇅</button>
+                    <button class="control-btn" onclick="onTextSizeChange(5)">A+</button>
+                    <button class="control-btn" onclick="onTextSizeChange(-5)">A-</button>
+                    <input class="color-picker" type="color" id="head" name="head" value="#ffffff" onchange="onChangeStrokeColor(this)">
+                    <input class="color-picker" type="color" id="head" name="head" value="#ffffff" onchange="onChangeFillColor(this)">
+                    <!-- <button class="control-btn" onclick=" onAddLine()">+</button> -->
+                    <button class="control-btn" onclick="returnToGallery()">back</button>
+                    <a class="download-link" href="#" onclick="downloadCanvas(this)" download="">Save</a>
+                    <a class="download-link" href="#" onclick="downloadCanvas(this)" download="">Download</a>
+                    <a class="download-link" href="#" onclick="downloadCanvas(this)" download="">Share on facebook</a>
+
+                </div>
+                <!-- <div class="controls control-box-1">
+                    <h1>sec.line</h1>
                     <input class="input-text" type="text" onkeyup="onMemeChange()">
                     <button class="control-btn" onclick=" onMoveLineUp()">↑</button>
                     <button class="control-btn" onclick="onMoveLineDown()">↓</button>
                     <button class="control-btn" onclick=" onMoveLineDown() ">⇅</button>
                     <button class="control-btn" onclick=" onAddLine()">+</button>
                     <button class="control-btn" onclick="returnToGallery()">back</button>
-                </div>
+                </div> -->
             </section>
         </section>
     </div>
-    </section>
 
+    <script src="js/utils.js"></script>
     <script src="lib/jquery.js"></script>
+    <script src="js/service.js"></script>
     <script src="js/main.js"></script>
     <script src="js/controller.js"></script>
-    <script src="js/service.js"></script>
 </body>
 
 </html>

@@ -1,148 +1,150 @@
 'use strict'
+
 //keep track of line numbers; 
 var lineNums = [];
 var lineIdx = 1;
-
+/*========================================================================================*/
 function renderGallery() {
 
     var images = getImages();
     var strHTMLs = '';
     var strHTMLs = images.map(image => {
-        return `<img class="item gallery-item" src="${image.url}" alt="" onclick="editImage(this)">`
+        return `<img class="item gallery-item" src="${image.url}" alt="" onclick="selectImage(this)">`
     });
     var elGallery = document.querySelector('.gallery');
     elGallery.innerHTML = strHTMLs.join('');
 }
 
-function onAddLine() {
-    var strHTML =
-        `<div class="controls control-box-${++lineIdx}">
-        <input class="input-text" type="text" onkeyup="onMemeChange()">
-        <button class="control-btn" onclick=" onMoveLineUp()">↑</button>
-        <button class="control-btn" onclick="onMoveLineDown()">↓</button>
-        <button class="control-btn" onclick=" onMoveLineDown() ">⇅</button>
-        <button class="control-btn" onclick=" onAddLine()">+</button>
-        <button class="control-btn" onclick="returnToGallery()">back</button>
-        <button class="control-btn" onclick="onRemoveLine()">X</button>
-    </div>`;
-    var elOperators = document.querySelector('.control-boxes-section');
-    elOperators.innerHTML += strHTML;
-    lineNums.push(lineIdx);
-}
-
-function onRemoveLine() {
-    var elOperators = document.querySelector('.control-boxes-section');
-    elOperators.removeChild(elOperators.lastChild);
-}
-
+/*========================================================================================*/
 function returnToGallery() {
 
     $('.gallery').show();
     $('.editor').hide();
-    $('.input-text2').val(' ');
-    $('.input-text1').val(' ');
+    $('.input-text').val(' ');
     // if (confirm('quit without saving?')) {
     // }
 }
-
+/*========================================================================================*/
 function drawText(x, y) {
-    gCtx.lineWidth = '1'
-    gCtx.strokeStyle = 'black'
-    gCtx.fillStyle = 'white'
-    gCtx.font = `${gMeme.lines[0].size}px Impact`
-    gCtx.textAlign = gMeme.lines[0].align
-    gCtx.fillText(gMeme.lines[0].txt, x, y)
-    gCtx.strokeText(gMeme.lines[0].txt, x, y)
+    gCtx.lineWidth = '1';
+    gCtx.strokeStyle = gMeme.lines[gMeme.selectedLineIdx].strokeColor;
+    gCtx.fillStyle = gMeme.lines[gMeme.selectedLineIdx].fillColor;
+    gCtx.font = `${gMeme.lines[gMeme.selectedLineIdx].size}px Impact`;
+    gCtx.textAlign = gMeme.lines[gMeme.selectedLineIdx].align;
+    gCtx.fillText(gMeme.lines[gMeme.selectedLineIdx].txt, x, y);
+    gCtx.strokeText(gMeme.lines[gMeme.selectedLineIdx].txt, x, y);
 }
 
-function onAddText(el) {
-    // document.querySelector('')
-
-    console.log($('.input-text').val());
-    gMeme.lines[0].txt = $('.input-text').val();
-    console.log($(gMeme.lines[0].txt));
-    drawText(gLineX, gLineY);
-}
-
+/*========================================================================================*/
 //hide gallery, show editor with selected picture.
-function editImage(el) {
+function selectImage(el) {
+    gCurrImg = el;
     $('.gallery').hide();
     $('.editor').show();
     $('.editor-container').show();
-    gCtx.drawImage(el, 0, 0, 500, 500);
+    gCtx.drawImage(gCurrImg, 0, 0, 500, 500);
 }
-
-function onMoveLineUp() {
-    // console.log('up')
-}
-
-function onMoveLineDown() {
-    // console.log('down')
-}
-
-function clearCanvas() {
-    gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height)
-}
-
-function onMemeChange() {
-    gMeme.lines[0].txt = $('.input-text').val();
+/*===============================================================================*/
+function onMoveLine(change) {
+    if (gLineY < (gMeme.lines[gMeme.selectedLineIdx].size + 10)) {
+        gLines += 20;
+        clearCanvas();
+        render();
+        return;
+    }
+    gLineY += change;
     clearCanvas();
+    render();
+}
+/*===============================================================================*/
+function render() {
+    drawText(gLineX, gLineY);
+    gCtx.drawImage(gCurrImg, 0, 0, 500, 500);
     drawText(gLineX, gLineY);
 }
+/*===============================================================================*/
+function onTextSizeChange(sizeInc) {
 
+    console.log(gCtx.measureText($('.input-text').val()).width);
+    let textSize = getTextSize();
+    console.log(textSize)
 
-// e.preventDefault();
+    if (gCtx.measureText($('.input-text').val()).width > 480) {
+        console.log(sizeInc)
+        textSize -= 5;
+        setTextSize(textSize);
+        render();
+        return;
+    }
+    textSize += sizeInc;
+    setTextSize(textSize);
+    clearCanvas();
+    render();
+}
+/*===============================================================================*/
+function clearCanvas() {
+    gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height);
+}
+/*===============================================================================*/
+function onMemeTextChange() {
+    console.log(gLineX, gLineY)
+    if (gCtx.measureText($('.input-text').val()).width > 450) {
 
-//  var text = $('.input-text').val(),
-//  fontSize = parseInt($('#font-size').val()),
-//  width = parseInt($('#width').val()),
-//  lines = [],
-//  line = '',
-//  lineTest = '',
-//  words = text.split(' '),
-//  currentY = 0;
+        return;
+    }
+    setMemeText($('.input-text').val());
+    clearCanvas();
+    render();
+}
+/*===============================================================================*/
+function canvasClicked(ev) {
 
-// gCtx.font = fontSize + 'px Impact';
-
-// for (var i = 0, len = words.length; i < len; i++) {
-//  lineTest = line + words[i] + ' ';
-
-//  // Check total width of line or last word
-//  if (gCtx.measureText(lineTest).width > width) {
-//      // Calculate the new height
-//      currentY = lines.length * fontSize + fontSize;
-
-//      // Record and reset the current line
-//      lines.push({ text: line, height: currentY });
-//      line = words[i] + ' ';
-//  } else {
-//      line = lineTest;
-//  }
+    let idx = getSelectedMemeLine();
+    console.log(idx)
+    console.log(ev.offsetX, ev.offsetY)
+        // if (ev.offsetY < gMeme.lines[idx].lineY) {
+        //     console.log('line1')
+        // }
+        // if (ev.offsetY < 480 && ev.offsetY >= gMeme.lines[idx].lineY) {
+        //     console.log('line2')
+        // }
+}
+/*===============================================================================*/
+function onChangeStrokeColor(el) {
+    setStrokeColor(el.value);
+    render();
+}
+/*===============================================================================*/
+function onChangeFillColor(el) {
+    setFillColor(el.value);
+    render();
+}
+/*========================================================================================*/
+// function onAddText(el) {
+//     console.log($('.input-text').val());
+//     setMemeText($('.input-text').val(), 0)
+//     gMeme.lines[0].txt = $('.input-text').val();
+//     console.log($(gMeme.lines[0].txt));
+//     drawText(gLineX, gLineY);
 // }
-
-// // Catch last line in-case something is left over
-// if (line.length > 0) {
-//  currentY = lines.length * fontSize + fontSize;
-//  lines.push({ text: line.trim(), height: currentY });
+/*========================================================================================*/
+// function onAddLine() {
+//     var strHTML =
+//         `<div class="controls control-box-${++lineIdx}">
+//         <input class="input-text" type="text" onkeyup="onMemeChange()">
+//         <button class="control-btn" onclick=" onMoveLineUp()">↑</button>
+//         <button class="control-btn" onclick="onMoveLineDown()">↓</button>
+//         <button class="control-btn" onclick=" onMoveLineDown() ">⇅</button>
+//         <button class="control-btn" onclick=" onAddLine()">+</button>
+//         <button class="control-btn" onclick="returnToGallery()">back</button>
+//         <button class="control-btn" onclick="onRemoveLine()">X</button>
+//     </div>`;
+//     var elOperators = document.querySelector('.control-boxes-section');
+//     elOperators.innerHTML += strHTML;
+//     lineNums.push(lineIdx);
 // }
-
-// // Visually output text
-// gCtx.clearRect(0, 0, 500, 500);
-// for (var i = 0, len = lines.length; i < len; i++) {
-//  gCtx.fillText(lines[i].text, 0, lines[i].height);
-// }
-
-
-
-// function saveAndRestore() {
-//     gCtx.strokeStyle = 'red'
-//     gCtx.fillStyle = 'white'
-//     drawText('befor save', 100, 60)
-//     gCtx.save()
-//         // drawText('after save', 100, 160)
-//     gCtx.strokeStyle = 'black'
-//     gCtx.fillStyle = 'red'
-//     drawText('after save and change', 20, 260)
-//     gCtx.restore()
-//     drawText('after restore', 100, 360)
+/*========================================================================================*/
+// function onRemoveLine() {
+//     var elOperators = document.querySelector('.control-boxes-section');
+//     elOperators.removeChild(elOperators.lastChild);
 // }
