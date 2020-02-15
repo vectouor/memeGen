@@ -321,9 +321,12 @@ li:hover {
         margin-top: 10px;
     }
     .editor .canvas-section {
-        max-width: 100%;
+        width: 100%;
         text-align: center;
-        object-fit: cover;
+    }
+    .editor .control-boxes-section {
+        text-align: center;
+        padding: 3px;
     }
     #my-canvas {
         width: 100%;
@@ -331,7 +334,6 @@ li:hover {
     }
     .controls {
         grid-template-rows: 1fr;
-        /* grid-template-columns: repeat(5, 1fr); */
     }
     .editor {
         grid-template-columns: auto;

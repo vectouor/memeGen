@@ -66,9 +66,7 @@ function onMoveLine(inc) {
 /*===============================================================================*/
 function onTextAlign(direction) {
     let idx = getSelectedMemeLine();
-    let memeTextHeight = getMemeLineY(idx);
-    memeTextHeight += inc;
-    setMemeLineY(memeTextHeight)
+    setTextAlignment(direction)
     render(idx);
 }
 /*===============================================================================*/
@@ -150,22 +148,6 @@ function onChangeFillColor(el) {
 //         setLineY(getSelectedMemeLine())
 //     }
 // }
-/*========================================================================================*/
-// function onMoveLine(inc) {
-
-//     let lineIdx = getSelectedMemeLine();
-
-//     if (gLineY < (gMeme.lines[lineIdx].lineY)) {
-//         gLineY -= 20;
-//         clearCanvas();
-//         render();
-//         return;
-//     }
-
-//     gLineY += inc;
-//     clearCanvas();
-//     render();
-// }
 
 /*========================================================================================*/
 // function onAddText(el) {
@@ -195,55 +177,4 @@ function onChangeFillColor(el) {
 // function onRemoveLine() {
 //     var elOperators = document.querySelector('.control-boxes-section');
 //     elOperators.removeChild(elOperators.lastChild);
-// }
-/*===============================================================================*/
-// function render() {
-//     gCtx.restore();
-//     gCtx.drawImage(gCurrImg, 0, 0, 500, 500);
-//     setSelectedMemeLine(0);
-//     setLineY(gMeme.lines[gMeme.selectedLineIdx].lineY);
-//     drawText();
-//     gCtx.save();
-//     setSelectedMemeLine(1);
-//     setLineY(gMeme.lines[gMeme.selectedLineIdx].lineY);
-//     drawText();
-//     gCtx.restore();
-//     drawText();
-// }
-/*========================================================================================*/
-// function drawText(x, y) {
-//     gCtx.lineWidth = '1';
-//     gCtx.strokeStyle = gMeme.lines[gMeme.selectedLineIdx].strokeColor;
-//     gCtx.fillStyle = gMeme.lines[gMeme.selectedLineIdx].fillColor;
-//     gCtx.font = `${gMeme.lines[gMeme.selectedLineIdx].size}px Impact`;
-//     gCtx.textAlign = gMeme.lines[gMeme.selectedLineIdx].align;
-//     gCtx.fillText(gMeme.lines[gMeme.selectedLineIdx].txt, x, y);
-//     gCtx.strokeText(gMeme.lines[gMeme.selectedLineIdx].txt, x, y);
-// }
-/*========================================================================================*/
-// function drawText() {
-//     gCtx.lineWidth = '1';
-//     gCtx.strokeStyle = gMeme.lines[gMeme.selectedLineIdx].strokeColor;
-//     gCtx.fillStyle = gMeme.lines[gMeme.selectedLineIdx].fillColor;
-//     gCtx.font = `${gMeme.lines[gMeme.selectedLineIdx].size}px Impact`;
-//     gCtx.textAlign = gMeme.lines[gMeme.selectedLineIdx].align;
-//     gCtx.fillText(gMeme.lines[gMeme.selectedLineIdx].txt, gLineX, gLineY);
-//     gCtx.strokeText(gMeme.lines[gMeme.selectedLineIdx].txt, gLineX, gLineY);
-// }
-
-/*========================================================================================*/
-
-// tr2a
-// function render() {
-//     gCtx.restore();
-//     gCtx.drawImage(gCurrImg, 0, 0, 500, 500);
-//     setSelectedMemeLine(0);
-//     setLineY(gMeme.lines[gMeme.selectedLineIdx].lineY);
-//     drawText();
-//     gCtx.save();
-//     setSelectedMemeLine(1);
-//     setLineY(gMeme.lines[gMeme.selectedLineIdx].lineY);
-//     drawText();
-//     gCtx.restore();
-//     drawText();
 // }
