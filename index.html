@@ -33,12 +33,11 @@
 
 
     <section class="editor grid" hidden>
-        <!-- <section class="editor grid"> -->
-        <section class="canvas-section">
+        <section class="canvas-section" hidden>
             <canvas id="my-canvas" width="500" height="500" style="border:1px solid"></canvas>
         </section>
 
-        <section class="control-boxes-section grid">
+        <section class="control-boxes-section" hidden>
             <div class="controls control-box-1">
                 <h1 class="editor-title">top line</h1>
                 <input class="input-text" type="text" onkeyup="onMemeTextChange(this)" onfocus="selectLine(this)">
@@ -72,9 +71,6 @@
             </div>
         </section>
     </section>
-    <main class="gallery-container items-center">
-        <section class="gallery grid"></section>
-    </main>
 
 
     <script src="lib/jquery.js"></script>

@@ -8,6 +8,9 @@ function init() {
     let idx = getSelectedMemeLine();
     gLineY = gMeme.lines[idx].lineY;
     renderGallery();
+    $('.editor').hide();
+    $('.canvas-section').hide();
+    $('.control-boxes-section').hide();
 }
 
 function toggleMenu() {

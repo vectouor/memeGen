@@ -16,6 +16,8 @@ function returnToGallery() {
 
     $('.gallery').show();
     $('.editor').hide();
+    $('.canvas-section').hide();
+    $('.control-boxes-section').hide();
     $('.input-text').val(' ');
 }
 /*========================================================================================*/
@@ -23,7 +25,8 @@ function selectImage(el) {
     gCurrImg = el;
     $('.gallery').hide();
     $('.editor').show();
-    $('.editor-container').show();
+    $('.canvas-section').show();
+    $('.control-boxes-section').show();
     render(0);
 }
 /*========================================================================================*/
