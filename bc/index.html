@@ -5,8 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>memeGen</title>
-
+    <title>Meme-Gen</title>
     <link rel="stylesheet" href="styles/styles.css">
 </head>
 
@@ -16,7 +15,8 @@
         <div class="nav-container flex space-between items-center">
             <div class="logo">MemeGen</div>
             <ul class="flex">
-                <li><a href="index.html" onclick>Gallery</a></li>
+                <li><a href="">Gallery</a></li>
+                <li><a href="">Memes</a></li>
                 <li><a href="">About</a></li>
             </ul>
             <button class="side-menu-btn" onclick="toggleMenu()">☰</button>
@@ -27,41 +27,23 @@
         <p>links</p>
     </header> -->
 
-    <main class="gallery-container items-center">
+    <!-- <main class="gallery-container items-center">
         <section class="gallery grid"></section>
-    </main>
+    </main> -->
 
 
-    <section class="editor grid" hidden>
-        <!-- <section class="editor grid"> -->
+    <!-- <section class="editor grid" hidden> -->
+    <section class="editor grid">
         <section class="canvas-section">
-            <canvas id="my-canvas" width="500" height="500" style="border:1px solid"></canvas>
+            <canvas id="my-canvas" width="500" height="500" style="border:1px solid" onclick="onSelectLine(event)"></canvas>
         </section>
 
         <section class="control-boxes-section grid">
             <div class="controls control-box-1">
-                <h1 class="editor-title">top line</h1>
-                <input class="input-text" type="text" onkeyup="onMemeTextChange(this)" onfocus="selectLine(this)">
-                <button class="control-btn" onclick=" onMoveLine(-10)">↑A</button>
-                <button class="control-btn" onclick="onMoveLine(10)">↓A</button>
-                <button class="control-btn" onclick="onTextAlign('right',this)">←A</button>
-                <button class="control-btn" onclick="onTextAlign('left',this)">A→</button>
-                <button class="control-btn" onclick="onTextAlign('center',this)">center</button>
-                <button class="control-btn" onclick="onTextSizeChange(5)">A+</button>
-                <button class="control-btn" onclick="onTextSizeChange(-5)">A-</button>
-                <input class="color-picker" type="color" id="head" name="head" value="#ffffff" onchange="onChangeStrokeColor(this)">
-                <input class="color-picker" type="color" id="head" name="head" value="#ffffff" onchange="onChangeFillColor(this)">
-                <!-- <button class="control-btn" onclick=" onAddLine()">+</button> -->
-                <button class="control-btn" onclick="returnToGallery()">back</button>
-            </div>
-            <div class="controls control-box-2">
-                <h1 class="editor-title">bottom line</h1>
-                <input class="input-text" type="text" onkeyup="onMemeTextChange(this)" onfocus="selectLine(this)">
-                <button class="control-btn" onclick=" onMoveLine(-10)">↑A</button>
-                <button class="control-btn" onclick="onMoveLine(10)">↓A</button>
-                <button class="control-btn" onclick="onTextAlign('right',this)">←A</button>
-                <button class="control-btn" onclick="onTextAlign('left',this)">A→</button>
-                <button class="control-btn" onclick="onTextAlign('center',this)">center</button>
+                <input class="input-text" type="text" onkeyup="onMemeTextChange()">
+
+                <button class="control-btn" onclick=" onMoveLine(-10)">↑</button>
+                <button class="control-btn" onclick="onMoveLine(10)">↓</button>
                 <button class="control-btn" onclick="onTextSizeChange(5)">A+</button>
                 <button class="control-btn" onclick="onTextSizeChange(-5)">A-</button>
                 <input class="color-picker" type="color" id="head" name="head" value="#ffffff" onchange="onChangeStrokeColor(this)">
@@ -69,6 +51,27 @@
                 <!-- <button class="control-btn" onclick=" onAddLine()">+</button> -->
                 <button class="control-btn" onclick="returnToGallery()">back</button>
                 <a class="download-link" href="#" onclick="downloadCanvas(this)" download="">Download</a>
+                <!-- <a class="download-link" href="#" onclick="downloadCanvas(this)" download="">Share on facebook</a> -->
+                <!-- <a class="btn" href="https://www.facebook.com/sharer/sharer.php?u=${uploadedImgUrl}&t=${uploadedImgUrl}" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=${uploadedImgUrl}&t=${uploadedImgUrl}'); return false;">
+                        Share   
+                     </a> -->
+            </div>
+            <div class="controls control-box-2">
+                <input class="input-text" type="text" onkeyup="onMemeTextChange()">
+
+                <button class="control-btn" onclick=" onMoveLine(-10)">↑</button>
+                <button class="control-btn" onclick="onMoveLine(10)">↓</button>
+                <button class="control-btn" onclick="onTextSizeChange(5)">A+</button>
+                <button class="control-btn" onclick="onTextSizeChange(-5)">A-</button>
+                <input class="color-picker" type="color" id="head" name="head" value="#ffffff" onchange="onChangeStrokeColor(this)">
+                <input class="color-picker" type="color" id="head" name="head" value="#ffffff" onchange="onChangeFillColor(this)">
+                <!-- <button class="control-btn" onclick=" onAddLine()">+</button> -->
+                <button class="control-btn" onclick="returnToGallery()">back</button>
+                <a class="download-link" href="#" onclick="downloadCanvas(this)" download="">Download</a>
+                <!-- <a class="download-link" href="#" onclick="downloadCanvas(this)" download="">Share on facebook</a> -->
+                <!-- <a class="btn" href="https://www.facebook.com/sharer/sharer.php?u=${uploadedImgUrl}&t=${uploadedImgUrl}" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=${uploadedImgUrl}&t=${uploadedImgUrl}'); return false;">
+                        Share   
+                     </a> -->
             </div>
         </section>
     </section>

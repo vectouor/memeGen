@@ -7,14 +7,18 @@
     src: url(../fonts/Montserrat/Montserrat-Regular.ttf);
 }
 
+@font-face {
+    font-family: SignikaNegative;
+    src: url(../fonts/SignikaNegative/SignikaNegative-SemiBold.ttf);
+}
+
 html {
-    /* font-family: Arial, Helvetica, sans-serif; */
     font-family: 'Montserrat', sans-serif;
-    background-color: #949BA0;
+    background-color: #d7c79e;
 }
 
 .logo {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: SignikaNegative, sans-serif;
     font-size: 2.5rem;
     margin-left: 15px;
     font-weight: 600;
@@ -32,7 +36,10 @@ html {
 .gallery,
 .gallery-item,
 .editor,
-.control-boxes-section {
+.control-boxes-section,
+.control-btn,
+.input-text,
+.double-button {
     border-radius: 10px;
 }
 
@@ -44,7 +51,7 @@ html {
 
 .navbar {
     width: 100%;
-    background-color: #BA9380;
+    background-color: #a35638;
     color: #fff;
 }
 
@@ -79,7 +86,7 @@ html {
 
 .nav-container a:hover,
 li:hover {
-    color: #ff0000;
+    color: #f6d392;
     font-size: 1.5em;
 }
 
@@ -89,9 +96,6 @@ li:hover {
 
 
 /*=====================================================================*/
-
-
-/*new*/
 
 .gallery {
     margin: 0.625rem 1.25rem 0.625rem;
@@ -110,20 +114,12 @@ li:hover {
 }
 
 .grid img:hover {
-    border: 2px solid rgb(255, 255, 255);
+    border: 2px solid #79540f;
 }
 
 .canvas-section {
     margin-left: auto;
 }
-
-
-/* 
-.canvas-section {
-    margin: 0 auto 10px;
-    background-color: rgb(255, 255, 255);
-    background-color: #0E95A1;
-} */
 
 
 /*=====================================================================*/
@@ -143,14 +139,9 @@ li:hover {
     margin: 10px 0 3px;
 }
 
-
-/* .editor-container {} */
-
 .control-boxes-section {
-    /* grid-template-rows: auto; */
     margin-right: auto;
-    /* margin-left: auto; */
-    background-color: #A2D3C2;
+    background-color: #d38c66;
     padding: 10px;
 }
 
@@ -174,6 +165,7 @@ li:hover {
     color: rgb(0, 0, 0);
     text-align: center;
     transition: all 0.2s;
+    border: 1px solid black;
 }
 
 .control-btn:hover,
@@ -192,6 +184,8 @@ li:hover {
     grid-row: 2;
     height: 36px;
     display: block;
+    font-size: 1.2rem;
+    border: 1px solid black;
 }
 
 .download-link {
@@ -207,6 +201,7 @@ li:hover {
     background-color: white;
     text-align: center;
     transition: all 0.2s;
+    border: 1px solid black;
 }
 
 
@@ -274,14 +269,15 @@ li:hover {
         display: block;
         color: #fff;
         height: 80px;
-        background-color: #BA9380;
-        border: #BA9380;
+        background-color: #a35638;
+        border: #a35638;
         font-size: 1.6rem;
+        border-radius: 10px;
     }
     .nav-container>ul {
         min-width: 200px;
         position: fixed;
-        background-color: #BA9380;
+        background-color: #a35638;
         top: 0;
         right: 0;
         margin-top: 0;

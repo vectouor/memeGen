@@ -1,8 +1,5 @@
 'use strict'
 
-//keep track of line numbers; 
-var lineNums = [];
-var lineIdx = 1;
 /*========================================================================================*/
 function renderGallery() {
 
@@ -14,32 +11,27 @@ function renderGallery() {
     var elGallery = document.querySelector('.gallery');
     elGallery.innerHTML = strHTMLs.join('');
 }
-
 /*========================================================================================*/
 function returnToGallery() {
 
     $('.gallery').show();
     $('.editor').hide();
     $('.input-text').val(' ');
-    // if (confirm('quit without saving?')) {
-    // }
 }
 /*========================================================================================*/
-//hide gallery, show editor with selected picture.
 function selectImage(el) {
     gCurrImg = el;
     $('.gallery').hide();
     $('.editor').show();
     $('.editor-container').show();
     render(0);
-    render(1);
 }
 /*========================================================================================*/
 function drawText(textLine) {
     gCtx.lineWidth = '1';
     gCtx.strokeStyle = textLine.strokeColor;
     gCtx.fillStyle = textLine.fillColor;
-    gCtx.font = `${textLine.size}px Impact`;
+    gCtx.font = `${textLine.size}px ${textLine.font}`;
     gCtx.textAlign = textLine.align;
     gLineX = textLine.lineX;
     gLineY = textLine.lineY;
@@ -48,11 +40,9 @@ function drawText(textLine) {
 }
 /*===============================================================================*/
 function render(lineIdx) {
-    gCtx.restore();
     let textLines = getMemeLines();
     gCtx.drawImage(gCurrImg, 0, 0, 500, 500);
     textLines.forEach(line => { drawText(line) });
-    gCtx.save();
 }
 
 /*===============================================================================*/
@@ -84,7 +74,6 @@ function onTextSizeChange(sizeInc) {
     textSize += sizeInc;
     setTextSize(textSize, idx);
     render(idx);
-    gCtx.save();
 }
 /*===============================================================================*/
 function clearCanvas() {
@@ -101,7 +90,6 @@ function onMemeTextChange(el) {
         return;
     }
     render(idx);
-    gCtx.save();
 }
 /*===============================================================================*/
 function onChangeStrokeColor(el) {
@@ -117,38 +105,6 @@ function onChangeFillColor(el) {
     setFillColor(el.value);
     render(idx);
 }
-/*===============================================================================*/
-
-
-// function saveCurrCanvasState() {
-//     gCtx.save();
-// }
-/*===============================================================================*/
-
-// function onSelectLine(ev) {
-
-//     let idx = getSelectedMemeLine();
-//     let lineSize = getTextSize(idx);
-//     let text = getMemeText(idx)
-//     let memeHeight = getMemeLineY();
-
-//     $('.input-text').val(text)
-
-//     if (ev.offsetY <= gLineY && ev.offsetY >= gLineY - lineSize) {
-//         console.log(ev.offsetY, '<=', gLineY, '&&', ev.offsetY, '>=', gLineY - lineSize)
-//         setSelectedMemeLine(0);
-//         console.log(getSelectedMemeLine())
-//         setLineY(getSelectedMemeLine())
-//     }
-
-//     if (ev.offsetY <= (gCanvas.height - 10) && ev.offsetY >= gMeme.lines[1].lineY - gMeme.lines[1].size) {
-//         // console.log(ev.offsetY, '<=', (gCanvas.height - 10), '&&', ev.offsetY, '>=', gMeme.lines[1].lineY - gMeme.lines[1].size);
-//         setSelectedMemeLine(1);
-//         console.log(getSelectedMemeLine())
-//         setLineY(getSelectedMemeLine())
-//     }
-// }
-
 /*========================================================================================*/
 // function onAddText(el) {
 //     console.log($('.input-text').val());
@@ -160,20 +116,27 @@ function onChangeFillColor(el) {
 /*========================================================================================*/
 // function onAddLine() {
 //     var strHTML =
-//         `<div class="controls control-box-${++lineIdx}">
-//         <input class="input-text" type="text" onkeyup="onMemeChange()">
-//         <button class="control-btn" onclick=" onMoveLineUp()">↑</button>
-//         <button class="control-btn" onclick="onMoveLineDown()">↓</button>
-//         <button class="control-btn" onclick=" onMoveLineDown() ">⇅</button>
-//         <button class="control-btn" onclick=" onAddLine()">+</button>
+//         `  <div class="controls control-box-2">
+//         <h1 class="editor-title">bottom line</h1>
+//         <input class="input-text" type="text" onkeyup="onMemeTextChange(this)" onfocus="selectLine(this)">
+//         <button class="control-btn" onclick=" onMoveLine(-10)">↑A</button>
+//         <button class="control-btn" onclick="onMoveLine(10)">↓A</button>
+//         <button class="control-btn" onclick="onTextAlign('right',this)">←A</button>
+//         <button class="control-btn" onclick="onTextAlign('left',this)">A→</button>
+//         <button class="control-btn" onclick="onTextAlign('center',this)">center</button>
+//         <button class="control-btn" onclick="onTextSizeChange(5)">A+</button>
+//         <button class="control-btn" onclick="onTextSizeChange(-5)">A-</button>
+//         <input class="color-picker" type="color" id="head" name="head" value="#ffffff" onchange="onChangeStrokeColor(this)">
+//         <input class="color-picker" type="color" id="head" name="head" value="#ffffff" onchange="onChangeFillColor(this)">
+//         <!-- <button class="control-btn" onclick=" onAddLine()">+</button> -->
 //         <button class="control-btn" onclick="returnToGallery()">back</button>
-//         <button class="control-btn" onclick="onRemoveLine()">X</button>
+//         <a class="download-link" href="#" onclick="downloadCanvas(this)" download="">Download</a>
 //     </div>`;
 //     var elOperators = document.querySelector('.control-boxes-section');
 //     elOperators.innerHTML += strHTML;
 //     lineNums.push(lineIdx);
 // }
-/*========================================================================================*/
+// /*========================================================================================*/
 // function onRemoveLine() {
 //     var elOperators = document.querySelector('.control-boxes-section');
 //     elOperators.removeChild(elOperators.lastChild);
