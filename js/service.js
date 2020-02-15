@@ -1,20 +1,20 @@
 'use strict'
 
-// var gMaxLineWidth = 480;
 var gCanvas;
 var gCtx;
 var gCurrImg;
+
+/* current text line indicators*/
 var gLineX;
 var gLineY;
-// var gLines = [];
-// var gLines = _createLines();
+
 var gKeywords = { 'happy': 12, 'funny puk': 1 }
 
 var gMeme = {
     selectedImgId: 1,
     selectedLineIdx: 0,
     lines: [{
-            txt: 'memeGen line 1',
+            txt: 'first line',
             size: 50,
             align: 'center',
             fillColor: 'white',
@@ -23,23 +23,17 @@ var gMeme = {
             lineY: 70,
         },
         {
-            txt: 'memeGen line 2',
-            size: 35,
+            txt: 'second line',
+            size: 50,
             align: 'center',
-            fillColor: 'green',
+            fillColor: 'white',
             stokeColor: 'black',
             lineX: 250,
             lineY: 480,
         }
     ],
 };
-// var lines = [{
-//     lineX: 250,
-//     lineY: 70,
-// }, {
-//     lineX: 250,
-//     lineY: 490,
-// }]
+
 var gImgs = [
     { id: 1, url: 'meme-imgs/1.jpg', keywords: ['toy story'] },
     { id: 2, url: 'meme-imgs/2.jpg', keywords: ['dogs'] },
@@ -61,56 +55,82 @@ var gImgs = [
     { id: 18, url: 'meme-imgs/18.jpg', keywords: ['tired'] },
 ];
 
-// function _createLine(lineCoords) {
-//     return {
-//         lineX: lineCoords.lineX,
-//         lineY: lineCoords.lineY
-//     }
-// }
-
-// function _createLines() {
-//     // var lines = loadFromStorage(KEY);
-//     // if (lines) return lines;
-
-//     var lines = [{
-//         lineX: 250,
-//         lineY: 70,
-//     }, {
-//         lineX: 250,
-//         lineY: 490,
-//     }].map(_createLine);
-//     return lines;
-// }
-
 /*========================================================================================*/
 /* getters & setters */
+
+function getMemeLines() { return gMeme.lines }
+
 function getImages() { return gImgs; }
 
 function getMeme() { return gMeme; }
 
-function getMemeLineSize(lineIdx = 0) { return gMeme.lines[lineIdx].size }
+function setSelectedMemeLine(idx) {
+    gMeme.selectedLineIdx = idx;
+}
 
-function getSelectedMemeLine() { return gMeme.selectedLineIdx; }
+function getSelectedMemeLine() {
+    return gMeme.selectedLineIdx;
+}
 
-function setSelectedMemeLine(idx) { gMeme.selectedLineIdx = idx; }
+function setMemeLineX(lineChnage) {
+    gMeme.lines[gMeme.selectedLineIdx].lineX = lineChnage;
+}
 
-function setStrokeColor(color, lineIdx = 0) { gMeme.lines[lineIdx].strokeColor = color; }
+function getMemeLineX() {
+    return gMeme.lines[gMeme.selectedLineIdx].lineX;
+}
 
-function getStrokeColor(lineIdx = 0) { return gMeme.lines[lineIdx].strokeColor; }
+function setMemeLineY(lineChnage) {
+    gMeme.lines[gMeme.selectedLineIdx].lineY = lineChnage;
+}
 
-function setFillColor(color, lineIdx = 0) { gMeme.lines[lineIdx].fillColor = color; }
+function getMemeLineY() {
+    return gMeme.lines[gMeme.selectedLineIdx].lineY;
+}
 
-function getFillColor(lineIdx = 0) { return gMeme.lines[lineIdx].fillColor; }
+function setStrokeColor(color) {
+    gMeme.lines[gMeme.selectedLineIdx].strokeColor = color;
+}
 
-function setTextSize(size, lineIdx = 0) { gMeme.lines[lineIdx].size = size; }
+function getStrokeColor() {
+    return gMeme.lines[gMeme.selectedLineIdx].strokeColor;
+}
 
-function getTextSize(lineIdx = 0) { return gMeme.lines[lineIdx].size; }
+function setFillColor(color) {
+    gMeme.lines[gMeme.selectedLineIdx].fillColor = color;
+}
 
-function setMemeText(text, lineIdx = 0) { gMeme.lines[lineIdx].txt = text; }
+function getFillColor() {
+    return gMeme.lines[gMeme.selectedLineIdx].fillColor;
+}
 
-function getMemeText(lineIdx = 0) { return gMeme.lines[lineIdx].text; }
+function setTextSize(size) {
+    gMeme.lines[gMeme.selectedLineIdx].size = size;
+}
 
-function setLineY(val) { gLineY = val; }
+function getTextSize() {
+    return gMeme.lines[gMeme.selectedLineIdx].size;
+}
+
+function setMemeText(text) {
+    gMeme.lines[gMeme.selectedLineIdx].txt = text;
+}
+
+function getMemeText() {
+    return gMeme.lines[gMeme.selectedLineIdx].txt;
+}
+
+function setTextAlignment(direction) {
+    gMeme.lines[gMeme.selectedLineIdx].align = direction;
+}
+
+function getTextAlignment() {
+    return gMeme.lines[gMeme.selectedLineIdx].align;
+}
+
+function setLineY(val) {
+    gLineY = val;
+}
 
 function getLineY() { return gLineY; }
 
@@ -119,9 +139,5 @@ function setLineX(val) { gLinex = val; }
 function getLineX() { return gLineX; }
 
 // function addLine(){}
-
-// function getLines() {
-//     return gLines;
-// }
 
 /*========================================================================================*/
