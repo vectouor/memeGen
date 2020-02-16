@@ -10,14 +10,12 @@ function renderGallery() {
     });
     var elGallery = document.querySelector('.gallery');
     elGallery.innerHTML = strHTMLs.join('');
+    $('.editor').hide();
 }
 /*========================================================================================*/
 function returnToGallery() {
-
     $('.gallery').show();
     $('.editor').hide();
-    $('.canvas-section').hide();
-    $('.control-boxes-section').hide();
     $('.input-text').val(' ');
 }
 /*========================================================================================*/
@@ -25,9 +23,8 @@ function selectImage(el) {
     gCurrImg = el;
     $('.gallery').hide();
     $('.editor').show();
-    $('.canvas-section').show();
-    $('.control-boxes-section').show();
     render(0);
+    render(1);
 }
 /*========================================================================================*/
 function drawText(textLine) {
@@ -42,7 +39,7 @@ function drawText(textLine) {
     gCtx.strokeText(textLine.txt, textLine.lineX, textLine.lineY);
 }
 /*===============================================================================*/
-function render(lineIdx) {
+function render() {
     let textLines = getMemeLines();
     gCtx.drawImage(gCurrImg, 0, 0, 500, 500);
     textLines.forEach(line => { drawText(line) });
@@ -54,29 +51,21 @@ function onMoveLine(inc) {
     let memeTextHeight = getMemeLineY(idx);
     memeTextHeight += inc;
     setMemeLineY(memeTextHeight)
-    render(idx);
+    render();
 }
 /*===============================================================================*/
 function onTextAlign(direction) {
-    let idx = getSelectedMemeLine();
     setTextAlignment(direction)
-    render(idx);
-}
-/*===============================================================================*/
-function selectLine(el) {
-    let className = $(el).parent()[0].className;
-    let inputLineNumber = +className.slice(-1);
-    setSelectedMemeLine((inputLineNumber - 1));
+    render();
 }
 /*===============================================================================*/
 
 function onTextSizeChange(sizeInc) {
     let idx = getSelectedMemeLine();
     let textSize = getTextSize(idx);
-
     textSize += sizeInc;
-    setTextSize(textSize, idx);
-    render(idx);
+    setTextSize(textSize);
+    render();
 }
 /*===============================================================================*/
 function clearCanvas() {
@@ -84,7 +73,6 @@ function clearCanvas() {
 }
 /*===============================================================================*/
 function onMemeTextChange(el) {
-    selectLine(el)
     let idx = getSelectedMemeLine();
     let memeText = getMemeText(idx);
     memeText = $(el).val();
@@ -92,14 +80,14 @@ function onMemeTextChange(el) {
     if (gCtx.measureText($('.input-text').val()).width > 450) {
         return;
     }
-    render(idx);
+    render();
 }
 /*===============================================================================*/
 function onChangeStrokeColor(el) {
     selectLine(el);
-    let idx = getSelectedMemeLine();
+    // let idx = getSelectedMemeLine();
     setStrokeColor(el.value);
-    render(idx);
+    // render(idx);
 }
 /*===============================================================================*/
 function onChangeFillColor(el) {
@@ -108,6 +96,29 @@ function onChangeFillColor(el) {
     setFillColor(el.value);
     render(idx);
 }
+
+function onAddLine() {
+    $('.input-text').val(' ')
+    createLine()
+    render();
+}
+
+function onFontSelect(el) {
+    selectLine(el);
+    let idx = getSelectedMemeLine();
+    let newFont = $('.font-selection').val();
+    setMemeFont(newFont);
+    render(idx);
+}
+
+function onSwitchLine() {
+    $('.input-text').val(' ')
+    let line = gMeme.lines.shift();
+    $('.input-text').val(line.txt)
+    gMeme.lines.push(line)
+}
+
+
 /*========================================================================================*/
 // function onAddText(el) {
 //     console.log($('.input-text').val());

@@ -1,12 +1,11 @@
 'use strict'
 
 function downloadCanvas(elLink) {
-    const data = gCanvas.toDataURL()
+
+    const data = gCanvas.toDataURL("image/jpg");
     elLink.href = data
-    elLink.download = 'myMeme'
+    elLink.download = 'myMeme';
 }
-
-
 
 // on submit call to this function
 function uploadImg(elForm, ev) {

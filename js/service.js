@@ -3,7 +3,7 @@
 var gCanvas;
 var gCtx;
 var gCurrImg;
-
+var gCanvasHeight;
 var gCanvasWidth;
 /* current text line indicators*/
 var gLineX;
@@ -58,6 +58,19 @@ var gImgs = [
     { id: 18, url: 'meme-imgs/18.jpg', keywords: ['trump'] },
 ];
 
+function createLine() {
+    gMeme.lines.push({
+        txt: 'new line',
+        size: 50,
+        align: 'center',
+        font: 'impact',
+        fillColor: 'white',
+        stokeColor: 'black',
+        lineX: 250,
+        lineY: 250,
+    })
+}
+
 /*========================================================================================*/
 /* getters & setters */
 
@@ -72,6 +85,14 @@ function setSelectedMemeLine(idx) {
 }
 
 function getSelectedMemeLine() {
+    return gMeme.selectedLineIdx;
+}
+
+function setMemeFont(idx) {
+    gMeme.selectedLineIdx = idx;
+}
+
+function getMemeFont() {
     return gMeme.selectedLineIdx;
 }
 

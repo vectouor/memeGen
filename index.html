@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>memeGen</title>
-
     <link rel="stylesheet" href="styles/styles.css">
 </head>
 
@@ -33,44 +32,59 @@
 
 
     <section class="editor grid" hidden>
-        <section class="canvas-section" hidden>
+        <!-- <section class="editor grid"> -->
+        <section class="canvas-section">
             <canvas id="my-canvas" width="500" height="500" style="border:1px solid"></canvas>
         </section>
 
-        <section class="control-boxes-section" hidden>
+        <section class="control-boxes-section grid">
             <div class="controls control-box-1">
-                <h1 class="editor-title">top line</h1>
-                <input class="input-text" type="text" onkeyup="onMemeTextChange(this)" onfocus="selectLine(this)">
-                <button class="control-btn" onclick=" onMoveLine(-10)">↑A</button>
-                <button class="control-btn" onclick="onMoveLine(10)">↓A</button>
-                <button class="control-btn" onclick="onTextAlign('right',this)">←A</button>
-                <button class="control-btn" onclick="onTextAlign('left',this)">A→</button>
-                <button class="control-btn" onclick="onTextAlign('center',this)">center</button>
-                <button class="control-btn" onclick="onTextSizeChange(5)">A+</button>
-                <button class="control-btn" onclick="onTextSizeChange(-5)">A-</button>
+                <!-- <h1 class="editor-title">top line</h1> -->
+                <input class="input-text" type="text" onkeyup="onMemeTextChange(this)">
+                <button class="control-btn" onclick=" onMoveLine(-10)">
+                    <img src="icons/arrow-up.png" alt="">
+                </button>
+                <button class="control-btn" onclick="onMoveLine(10)">
+                    <img src="icons/arrow-down.png" alt="">
+                </button>
+                <button class="control-btn" onclick="onTextAlign('right',this)">
+                    <img src="icons/align-to-right.png" alt="">
+                </button>
+                <button class="control-btn" onclick="onTextAlign('center',this)">
+                    <img src="icons/align-center.png" alt="">
+                </button>
+                <button class="control-btn" onclick="onTextAlign('left',this)">
+                    <img src="icons/align-to-left.png" alt="">
+                </button>
+                <button class="control-btn" onclick="onTextSizeChange(5)">
+                    <img src="icons/increase font.png" alt="">
+                </button>
+                <button class="control-btn" onclick="onTextSizeChange(-5)">
+                    <img src="icons/decrease font.png" alt="">
+                </button>
+                <button class="control-btn" onclick="onSwitchLine()">
+                    <img src="icons/up-and-down.png" alt="">
+                </button>
+                <button class="control-btn" onclick="onAddLine()">
+                    <img src="icons/add.png" alt="">
+                </button>
+
+                <select class="font-selection" onchange="onFontSelect(this)">
+                    <option value="" disabled selected>Select font</option>
+                    <option>Helvetica</option>
+                    <option>Georgia</option>
+                    <option>Arial</option>
+                 </select>
                 <input class="color-picker" type="color" id="head" name="head" value="#ffffff" onchange="onChangeStrokeColor(this)">
                 <input class="color-picker" type="color" id="head" name="head" value="#ffffff" onchange="onChangeFillColor(this)">
-                <!-- <button class="control-btn" onclick=" onAddLine()">+</button> -->
-                <button class="control-btn" onclick="returnToGallery()">back</button>
-            </div>
-            <div class="controls control-box-2">
-                <h1 class="editor-title">bottom line</h1>
-                <input class="input-text" type="text" onkeyup="onMemeTextChange(this)" onfocus="selectLine(this)">
-                <button class="control-btn" onclick=" onMoveLine(-10)">↑A</button>
-                <button class="control-btn" onclick="onMoveLine(10)">↓A</button>
-                <button class="control-btn" onclick="onTextAlign('right',this)">←A</button>
-                <button class="control-btn" onclick="onTextAlign('left',this)">A→</button>
-                <button class="control-btn" onclick="onTextAlign('center',this)">center</button>
-                <button class="control-btn" onclick="onTextSizeChange(5)">A+</button>
-                <button class="control-btn" onclick="onTextSizeChange(-5)">A-</button>
-                <input class="color-picker" type="color" id="head" name="head" value="#ffffff" onchange="onChangeStrokeColor(this)">
-                <input class="color-picker" type="color" id="head" name="head" value="#ffffff" onchange="onChangeFillColor(this)">
-                <!-- <button class="control-btn" onclick=" onAddLine()">+</button> -->
-                <button class="control-btn" onclick="returnToGallery()">back</button>
                 <a class="download-link" href="#" onclick="downloadCanvas(this)" download="">Download</a>
             </div>
+            <button class="control-btn" onclick="returnToGallery()">back</button>
         </section>
     </section>
+    <main class="gallery-container items-center">
+        <section class="gallery grid"></section>
+    </main>
 
 
     <script src="lib/jquery.js"></script>

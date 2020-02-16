@@ -5,12 +5,10 @@ function init() {
     gCtx = gCanvas.getContext('2d');
     gLineX = gCanvas.width / 2;
     gCanvasWidth = gCanvas.width;
+    gCanvasHeight = gCanvas.height;
     let idx = getSelectedMemeLine();
     gLineY = gMeme.lines[idx].lineY;
     renderGallery();
-    $('.editor').hide();
-    $('.canvas-section').hide();
-    $('.control-boxes-section').hide();
 }
 
 function toggleMenu() {
